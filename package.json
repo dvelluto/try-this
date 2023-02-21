@@ -1,0 +1,24 @@
+{
+  "name": "try-else",
+  "version": "1.0.0",
+  "description": "A small utility to handle simple try-catch situations without the boilerplate of usual try/catch",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dvelluto/try-else.git"
+  },
+  "keywords": [
+    "try",
+    "catch",
+    "boilerplate"
+  ],
+  "author": "@dvelluto",
+  "license": "SEE LICENSE IN <LICENSE>",
+  "bugs": {
+    "url": "https://github.com/dvelluto/try-else/issues"
+  },
+  "homepage": "https://github.com/dvelluto/try-else#readme"
+}
