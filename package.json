@@ -4,7 +4,8 @@
   "description": "A small utility to handle simple try-catch situations without the boilerplate of usual try/catch",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "Deno test",
+    "bundle": "tsc"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/dvelluto/try-else/issues"
   },
-  "homepage": "https://github.com/dvelluto/try-else#readme"
+  "homepage": "https://github.com/dvelluto/try-else#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
 }
