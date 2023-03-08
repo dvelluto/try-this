@@ -2,7 +2,7 @@
   "name": "try-this",
   "version": "1.0.0",
   "description": "A small utility to handle simple try-catch situations without the boilerplate of usual try/catch",
-  "main": "./lib/tryThis.js",
+  "main": "./lib",
   "scripts": {
     "test": "Deno test",
     "bundle": "tsc"
