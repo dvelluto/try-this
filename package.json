@@ -1,15 +1,15 @@
 {
-  "name": "try-else",
+  "name": "try-this",
   "version": "1.0.0",
   "description": "A small utility to handle simple try-catch situations without the boilerplate of usual try/catch",
-  "main": "index.js",
+  "main": "./lib/tryThis.js",
   "scripts": {
     "test": "Deno test",
     "bundle": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dvelluto/try-else.git"
+    "url": "git+https://github.com/dvelluto/try-this.git"
   },
   "keywords": [
     "try",
@@ -19,9 +19,9 @@
   "author": "@dvelluto",
   "license": "SEE LICENSE IN <LICENSE>",
   "bugs": {
-    "url": "https://github.com/dvelluto/try-else/issues"
+    "url": "https://github.com/dvelluto/try-this/issues"
   },
-  "homepage": "https://github.com/dvelluto/try-else#readme",
+  "homepage": "https://github.com/dvelluto/try-this#readme",
   "devDependencies": {
     "typescript": "^4.9.5"
   }
