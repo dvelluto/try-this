@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm bundle
+      - run: npm run bundle
 
   publish-npm:
     needs: build
