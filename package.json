@@ -1,6 +1,6 @@
 {
   "name": "try-this",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A small utility to handle simple try-catch situations without the boilerplate of usual try/catch",
   "main": "./lib",
   "scripts": {
