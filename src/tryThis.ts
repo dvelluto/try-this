@@ -78,3 +78,20 @@ export const tryThis = <TReturn, TError> (
 ): Result<TReturn | TError> => {
   return new TryThis(tryFn).else(options.else).fallback(options.fallback).result()
 }
+
+export const tryThisAsync = async <TReturn, TError> (
+  tryPromise: Promise<TReturn>,
+  options: {
+    chain?: boolean
+    fallback?: TReturn
+    else?: () => (Result<TReturn, TError> | unknown | void)
+  } = {}
+): Promise<Result<TReturn, TError>> => {
+  return await tryPromise
+    .then((result: TReturn) => new TryThis<TReturn, TError>(() => result))
+    .catch((reason: TError) => Promise.resolve(new TryThis<TReturn, TError>(() => { throw reason })))
+    .then((builder: TryThis<TReturn, TError>) => builder.result().ok
+      ? builder.result()
+      : builder.else(options.else).fallback(options.fallback).result()
+    )
+}
