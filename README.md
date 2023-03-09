@@ -24,7 +24,7 @@ const { ok, value, error } = tryThis(throwingFunction)
 ```
 
 ### Options
-We can provide an options object which will get a fallback value (of the same type as the expected value) and / or an 'else' function which should return the same kind of type as the original function
+We can provide an options object which will get a fallback value (of the same type as the expected value) and / or an 'else' function which can return the same kind of type as the original function or be void and the original error (or fallback) will be passed back.
 
 ```
 const { ok, value, error } = tryThis(throwingFunction, {

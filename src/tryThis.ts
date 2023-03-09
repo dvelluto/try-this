@@ -9,9 +9,8 @@ export type Result<TReturn, TError = undefined> =
     value: TReturn | undefined
   }
 
-
 export interface TryThisBuilder<TReturn, TError = undefined> {
-  else: (cb: () => TReturn | Result<TReturn, TError>) => TryThisBuilder<TReturn, TError>
+  else: (cb?: () => (Result<TReturn, TError> | unknown | void)) => TryThisBuilder<TReturn, TError>
   fallback: (value: TReturn) => TryThisBuilder<TReturn, TError>
   result: () => Result<TReturn, TError>
 }
@@ -27,7 +26,7 @@ class TryThis<TReturn, TError = undefined> implements TryThisBuilder<TReturn, TE
     return this.tryResult
   }
 
-  constructor (tryFn: () => TReturn | Result<TReturn, TError>) {
+  constructor (tryFn: () => (TReturn | Result<TReturn, TError>)) {
     try {
       const result = tryFn()
 
@@ -48,9 +47,13 @@ class TryThis<TReturn, TError = undefined> implements TryThisBuilder<TReturn, TE
     }
   }
 
-  else (cb?: () => TReturn | Result<TReturn, TError>) {
+  else (cb?: () => (Result<TReturn, TError> | unknown | void)) {
     if (this.tryResult.ok === false && cb) {
-      this.tryResult = new TryThis(cb).result()
+      const result = cb()
+
+      if (isTryElseResult<TReturn, TError>(result)) {
+        this.tryResult = result
+      }
     }
 
     return this
@@ -66,11 +69,11 @@ class TryThis<TReturn, TError = undefined> implements TryThisBuilder<TReturn, TE
 }
 
 export const tryThis = <TReturn, TError> (
-  tryFn: () => TReturn | Result<TReturn, TError>,
+  tryFn: () => (TReturn | Result<TReturn, TError>),
   options: {
     chain?: boolean
     fallback?: TReturn
-    else?: () => TReturn | Result<TReturn, TError>
+    else?: () => (Result<TReturn, TError> | unknown | void)
   } = {}
 ): Result<TReturn | TError> => {
   return new TryThis(tryFn).else(options.else).fallback(options.fallback).result()

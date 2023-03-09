@@ -37,11 +37,24 @@ Deno.test('should try with the else function in case of throw', () => {
   const testThrowing = (): string => {
     throw error
   }
-  const elseFunction = () => 'else!'
+  const elseFunction = () => 'else'
 
   const result = tryThis(testThrowing, { else: elseFunction })
 
-  assertEquals(result, { ok: true, value: 'else!' })
+  assertEquals(result, { ok: false, value: undefined, error })
+})
+
+Deno.test('should try with the else function in case of throw and return fallback', () => {
+  const error = new Error('error test')
+  const testThrowing = (): string => {
+    throw error
+  }
+  const elseFunction = () => 'else'
+  const fallback = 'fallback'
+
+  const result = tryThis(testThrowing, { else: elseFunction, fallback })
+
+  assertEquals(result, { ok: false, value: fallback, error })
 })
 
 
@@ -74,19 +87,6 @@ Deno.test('should handle recoursive call when throwing return and custom fallbac
   }
 
   const result = tryThis(() => tryThis(testThrowing, { fallback: internalFallback }), { fallback })
-
-  assertEquals(result, { ok: false, value: 'fallback', error })
-})
-
-Deno.test('should handle throwing in else function', () => {
-  const error = new Error('error test')
-  const fallback = 'fallback'
-  const internalFallback = 'notThis!'
-  const testThrowing = (): string => {
-    throw error
-  }
-
-  const result = tryThis(() => tryThis(testThrowing, { fallback: internalFallback }), { fallback, else: testThrowing })
 
   assertEquals(result, { ok: false, value: 'fallback', error })
 })
