@@ -28,9 +28,31 @@ We can provide an options object which will get a fallback value (of the same ty
 
 ```
 const { ok, value, error } = tryThis(throwingFunction, {
-  fallback: 'some value',
-  else: () => 'some equivalent function'
+  fallback: 'some fallback value',
+  else: () => 'some alternative to the original function'
 })
 ```
 The else function will be evaluated the same way as the original function.
 The fallback value is the last resort value.
+
+### Async?
+Yes, there is also `tryThisAsync` made for handling async functions or promises
+
+```
+const { ok, value, error } = await tryThisAsync(promise, {
+  fallback: 'some fallback value',
+  else: () => 'some alternative to the original promise'
+})
+```
+The else function will be evaluated in place of the original promise.
+The fallback value is the last resort value.
+
+#### Ok promises, but async functions?
+At the moment it's handling only promises, if you have an async function, you'll have to call it in it
+
+```
+const { ok, value, error } = await tryThisAsync(fnAsync(), {
+  fallback: 'some fallback value',
+  else: () => 'some alternative to the original async function'
+})
+```

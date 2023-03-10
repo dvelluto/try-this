@@ -105,6 +105,14 @@ Deno.test('should handle recoursive call in else function', () => {
 })
 
 Deno.test('should handle async functions', async () => {
+  const testFn = async () => await Promise.resolve('test')
+
+  const result = await tryThisAsync(testFn())
+
+  assertEquals(result, { ok: true, value: 'test' })
+})
+
+Deno.test('should handle promises', async () => {
   const testFn = Promise.resolve('test')
 
   const result = await tryThisAsync(testFn)
